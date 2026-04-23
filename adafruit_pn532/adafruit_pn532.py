@@ -539,11 +539,11 @@ class PN532:
         value_backup = block[8:12]
         if value != value_backup:
             raise RuntimeError(
-                "Value block bytes 0-3 do not match 8-11: " + "".join("%02x" % b for b in block)
+                "Value block bytes 0-3 do not match 8-11: " + "".join(f"{b:02x}" for b in block)
             )
         if value_inverted != bytearray(map((lambda x: x ^ 0xFF), value)):
             raise RuntimeError(
-                "Inverted value block bytes 4-7 not valid: " + "".join("%02x" % b for b in block)
+                "Inverted value block bytes 4-7 not valid: " + "".join(f"{b:02x}" for b in block)
             )
 
         return struct.unpack("<i", value)[0]
